@@ -1,6 +1,19 @@
-function Grid(size, previousState) {
-  this.size = size;
-  this.cells = previousState ? this.fromState(previousState) : this.empty();
+function Grid(size, previousState, grid) {
+  if (grid) {
+    this.size = grid.size;
+    this.cells = grid.cells.map((row) =>
+      row.map((tile) => {
+        if (tile) {
+          return new Tile({ x: tile.x, y: tile.y }, tile.value);
+        } else {
+          return null;
+        }
+      })
+    );
+  } else {
+    this.size = size;
+    this.cells = previousState ? this.fromState(previousState) : this.empty();
+  }
 }
 
 // Build a grid of the specified size
@@ -8,7 +21,7 @@ Grid.prototype.empty = function () {
   var cells = [];
 
   for (var x = 0; x < this.size; x++) {
-    var row = cells[x] = [];
+    var row = (cells[x] = []);
 
     for (var y = 0; y < this.size; y++) {
       row.push(null);
@@ -22,7 +35,7 @@ Grid.prototype.fromState = function (state) {
   var cells = [];
 
   for (var x = 0; x < this.size; x++) {
-    var row = cells[x] = [];
+    var row = (cells[x] = []);
 
     for (var y = 0; y < this.size; y++) {
       var tile = state[x][y];
@@ -95,15 +108,19 @@ Grid.prototype.removeTile = function (tile) {
 };
 
 Grid.prototype.withinBounds = function (position) {
-  return position.x >= 0 && position.x < this.size &&
-         position.y >= 0 && position.y < this.size;
+  return (
+    position.x >= 0 &&
+    position.x < this.size &&
+    position.y >= 0 &&
+    position.y < this.size
+  );
 };
 
 Grid.prototype.serialize = function () {
   var cellState = [];
 
   for (var x = 0; x < this.size; x++) {
-    var row = cellState[x] = [];
+    var row = (cellState[x] = []);
 
     for (var y = 0; y < this.size; y++) {
       row.push(this.cells[x][y] ? this.cells[x][y].serialize() : null);
@@ -112,6 +129,6 @@ Grid.prototype.serialize = function () {
 
   return {
     size: this.size,
-    cells: cellState
+    cells: cellState,
   };
 };

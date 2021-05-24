@@ -27,16 +27,16 @@
     </div>
 
     <div class="above-game">
-      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-      <a class="restart-button">New Game</a>
+      <p class="game-intro">Jogando <strong>2048</strong> com o algoritmo <a href="https://en.wikipedia.org/wiki/Monte_Carlo_tree_search" rel="noopener noreferrer">MCTS</a>!</p>
+      <a id="ia-button" class="restart-button" onClick="toggleAI();">Começar IA</a>
     </div>
 
     <div class="game-container">
       <div class="game-message">
         <p></p>
         <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
-          <a class="retry-button">Try again</a>
+	        <a class="keep-playing-button">Continuar</a>
+          <a class="retry-button" onClick="restartGame();">Tente de novo</a>
         </div>
       </div>
 
@@ -72,16 +72,19 @@
       </div>
     </div>
 
+    <div id="next-number">
+      <strong id="next-number-tile" class="mini-tile"></strong> alcançado em <strong id="next-number-time" class="mini-time"></strong> segundos.
+    </div>
+
+    <div id="table">
+    </div>
+
     <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+      <strong class="important">Como jogar:</strong> Comece a Inteligência Artificial apertando em <strong>Começar IA</strong> e ela vai jogar automaticamente, juntando dois blocos de mesmo valor para gerar valores cada vez maiores! Você pode pausar e reiniciar a simulação a qualquer momento apertando os botões <strong>Parar IA</strong> e <strong>Começar IA</strong> durante o jogo.
     </p>
     <hr>
     <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
-    </p>
-    <hr>
-    <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+      Implementação da Inteligência Artificial desenvolvida por <a href="https://github.com/xTecna" target="_blank" rel="noopener noreferrer">Raquel Marcolino</a> e interface por <a href="http://gabrielecirulli.com" target="_blank" rel="noopener noreferrer">Gabriele Cirulli</a>.
     </p>
   </div>
 
@@ -94,6 +97,8 @@
   <script src="js/tile.js"></script>
   <script src="js/local_storage_manager.js"></script>
   <script src="js/game_manager.js"></script>
+  <script src="js/abstract_game_manager.js"></script>
+  <script src="js/mcts_ai.js"></script>
   <script src="js/application.js"></script>
 </body>
 </html>
